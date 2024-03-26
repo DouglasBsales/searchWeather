@@ -5,29 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Clima</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/media-queries.css" />
   </head>
   <body class="flex flex-col items-center">
-    <div class="flex flex-col items-center pt-[200px]">
+    <div class="w-[500px] flex flex-col items-center pt-[200px]" id="divPai">
       <div>
         <p>Descubra o clima na sua cidade</p>
       </div>
       <div>
         <input
           type="text"
-          class="w-[500px] h-[40px] border outline-none rounded-md"
+          class="w-[500px] h-[40px] border outline-none rounded-md pl-[10px]"
           id="campoClima"
         />
       </div>
-      <div>
-        <button
-          class="border mt-[10px] px-[10px] py-[5px] outline-none"
-          onclick="getCidades()"
-        >
-          <p>Pesquisar</p>
-        </button>
-      </div>
+      <div></div>
+      <p id="error" class="text-xs pt-[10px]"></p>
+      <div id="resultados" class="w-[500px]"></div>
     </div>
-    <div id="resultados" class="w-[400px]"></div>
   </body>
   <script src="scripts/script.js"></script>
 </html>

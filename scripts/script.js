@@ -1,5 +1,6 @@
 let divResultados = document.getElementById("resultados");
 let divCampoClima = document.getElementById("campoClima");
+let error = document.getElementById("error");
 
 function getCidades() {
   let campoClima = document.getElementById("campoClima").value;
@@ -8,20 +9,15 @@ function getCidades() {
     `https://www.meteoblue.com/pt/server/search/query3?query=${campoClima}&apikey=73WC9IzLXcoNfuPw.`
   ).then(async (res) => {
     if (!res.ok) {
-      throw new Error("Não foi possível encontrar a cidade");
+      throw new Error("ocorreu um erro, já estamos verificando!");
     }
 
     let data = await res.json();
-    console.log(data);
     let results = data.results;
-    results.map((info) => {
-      let latitude = info.lat;
-      let longitude = info.lon;
-      let als = info.asl;
-      console.log(latitude);
-      console.log(longitude);
-      console.log(als);
-    });
+    console.log(results);
+    if (results.length === 0) {
+      error.innerHTML = "Não foi possível encontrar sua cidade";
+    }
 
     divResultados.innerHTML = "";
 
@@ -29,10 +25,10 @@ function getCidades() {
       let divResults = document.createElement("div");
 
       divResults.innerHTML = `   
-     <button class="flex gap-[5px] py-[10px] outline-none">
+     <button class="flex gap-[5px] py-[10px] outline-none" onclick="getClimas('${element.name}', ${element.lat}, ${element.lon})">
         <p>${element.name}, </p>
-        <p>${element.country} - </p>
-        <p>${element.admin1}</p>
+        <p>${element.admin1} - </p>
+        <p>${element.country}</p>
      </button>
         <hr>
         `;
@@ -46,6 +42,21 @@ function getCidades() {
 
 document.getElementById("campoClima").addEventListener("keyup", getCidades);
 
+function getClimas(nomeCidade, latitude, longitude) {
+  fetch(
+    `https://my.meteoblue.com/packages/basic-1h_basic-day?&name=${nomeCidade}&apikey=73WC9IzLXcoNfuPw&lat=${latitude}&lon=${longitude}`
+  ).then(async (res) => {
+    if (!res.ok) {
+      throw new Error("Não foi possível encontrar a cidade");
+    }
+
+    let dataClima = await res.json();
+    console.log(dataClima);
+    divResultados.innerHTML = "";
+    document.getElementById("campoClima").value = "";
+  });
+}
+
 function ClearContent() {
   let divCampoClima = document.getElementById("campoClima").value;
 
@@ -54,18 +65,3 @@ function ClearContent() {
     divResultados.style.display = "none";
   }
 }
-
-function getClimas() {
-  let campoClima = document.getElementById("campoClima").value;
-  fetch(
-    "https://my.meteoblue.com/packages/basic-1h_basic-day?apikey=73WC9IzLXcoNfuPw&lat=-8.05389&lon=-34.8811&asl=8"
-  ).then(async (res) => {
-    if (!res.ok) {
-      throw new Error("Não foi possível encontrar a cidade");
-    }
-
-    let dataClima = await res.json();
-    console.log(dataClima);
-  });
-}
-getClimas();

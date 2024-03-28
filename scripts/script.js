@@ -78,11 +78,11 @@ function getClimas(nomeCidade, latitude, longitude) {
     switch (pictocode) {
       case 1:
         document.getElementById("pictograma").innerText =
-          "Céu ensolarado e sem nuvens";
+          "Céu claro e sem nuvens";
         break;
       case 2:
         document.getElementById("pictograma").innerText =
-          "Ensolarado e poucas nuvens";
+          "Claro e poucas nuvens";
         break;
       case 3:
         document.getElementById("pictograma").innerText =
@@ -182,7 +182,7 @@ function getClimas(nomeCidade, latitude, longitude) {
 
     divResultados.innerHTML = "";
     document.getElementById("campoClima").value = "";
-    document.getElementById('descobriClima').classList.add('hidden')
+    document.getElementById("descobriClima").classList.add("hidden");
   });
 }
 

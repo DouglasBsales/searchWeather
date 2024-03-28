@@ -1,5 +1,7 @@
 let divResultados = document.getElementById("resultados");
 let divCampoClima = document.getElementById("campoClima");
+let divClimaAll = document.getElementById('climaAll')
+let divImagem = document.getElementById('divImagem')
 let error = document.getElementById("error");
 
 function getCidades() {
@@ -14,12 +16,15 @@ function getCidades() {
 
     let data = await res.json();
     let results = data.results;
-    console.log(results);
-    if (results.length === 0) {
-      error.innerHTML = "Não foi possível encontrar sua cidade";
+    if (results.length === 0 ) {
+      error.innerText = "Não foi possível encontrar sua cidade";
+      divResultados.classList.add('hidden')
+      divClimaAll.classList.add('block')
+      
     } else {
-      error.innerHTML = "";
+      error.innerText = "";
     }
+    
 
     divResultados.innerHTML = "";
 
@@ -36,9 +41,8 @@ function getCidades() {
         `;
 
       divResultados.appendChild(divResults);
+      divResultados.classList.remove('hidden')
     });
-    ClearContent();
-    divResultados.style.display = "block";
   });
 }
 
@@ -110,12 +114,12 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
         break;
       case 9:
         document.getElementById("pictograma").innerText = "Nublado com neve";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/nubladoComNeve.png"
         break;
       case 10:
         document.getElementById("pictograma").innerText =
           "Misturado com pancadas de neve";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/misturadoComPancadasDeNeve.png"
         break;
       case 11:
         document.getElementById("pictograma").innerText =
@@ -125,32 +129,32 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
       case 12:
         document.getElementById("pictograma").innerText =
           "Nublado com chuva fraca";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/nubladoComChuva.png"
         break;
       case 13:
         document.getElementById("pictograma").innerText =
           "Nublado com neve fraca";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/nubladoComNeve.png."
         break;
       case 14:
         document.getElementById("pictograma").innerText =
           "Parcialmente nublado com chuva";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/parcialmenteNubladoComChuva.png"
         break;
       case 15:
         document.getElementById("pictograma").innerText =
           "Maioritariamente nublado com neve";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/maioritariamenteNubladoComNeve.png"
         break;
       case 16:
         document.getElementById("pictograma").innerText =
           "Muito nublado com chuva fraca";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/nubladoComChuva.png"
         break;
       case 17:
         document.getElementById("pictograma").innerText =
           "Parcialmente nublado com neve fraca";
-        document.getElementById('imgClima').src="public/claro e poucas nuvens.png"
+        document.getElementById('imgClima').src="public/parcialmenteNubladoComNeveFraca.png"
         break;
     }
 
@@ -192,17 +196,11 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
         break;
     }
 
-    divResultados.innerHTML = "";
+    divResultados.classList.add('hidden')
     document.getElementById("campoClima").value = "";
-    document.getElementById("descobriClima").classList.add("hidden");
   });
 }
 
-function ClearContent() {
-  let divCampoClima = document.getElementById("campoClima").value;
-
-  if (divCampoClima.length === 0) {
-    divResultados.innerHTML = "";
-    divResultados.style.display = "none";
-  }
-}
+window.onload = function() {
+  getClimas("São Paulo", -23.5505, -46.6333, "São Paulo", "Brasil");
+};

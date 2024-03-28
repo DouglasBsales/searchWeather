@@ -12,7 +12,7 @@
     />
   </head>
   <body class="flex justify-center">
-    <div class="w-[600px] flex flex-col items-center" id="divPai">
+    <div class="w-[500px] flex flex-col items-center" id="divPai">
       <div class="w-full flex flex-col items-center pb-[30px] pt-[20px]">
         <div class="flex gap-[5px] pb-[20px]">
           <p class="font-semibold text-[#5D5D5D]">Previsão do tempo</p>
@@ -32,26 +32,27 @@
           </div>
         </div>
       </div>
-        <img src="public/possiveisPancadasDeChuvaEtrovoadas.png" alt="" class="w-[200px] h-[200px]" id="imgClima">
-      <div
-        class="pb-[10px] flex flex-col items-center justify-center pt-[10px]"
-      >
-        <div class="text-center">
-          <p id="country"></p>
-          <p id="diaSemana" class="text-md font-semibold text-[#5D5D5D]"></p>
-          <div class="flex justify-center">
-            <p id="temperatura" class="text-7xl"></p>
-            <div class="flex text-lg hidden" id="graus">
-              <p>°</p>
-              <p>C</p>
+        <div class="flex flex-col items-center" id="climaAll">
+          <div id="divImagem"></div>
+          <div class="pb-[10px] flex flex-col items-center justify-center">
+            <div class="text-center" >
+              <p id="country"></p>
+              <p id="diaSemana" class="text-md font-semibold text-[#5D5D5D]"></p>
+              <div class="flex justify-center">
+                <p id="temperatura" class="text-7xl"></p>
+              <div class="flex text-lg hidden" id="graus">
+                <p>°</p>
+                <p>C</p>
+              </div>
             </div>
+            <p id="pictograma" class="text-md font-semibold text-[#5D5D5D]"></p>
           </div>
-          <p id="pictograma" class="text-md font-semibold text-[#5D5D5D]"></p>
         </div>
       </div>
       <div class="flex flex-col items-center" id="descobriClima">
+        <div id="resultados" class="w-[525px] h-[400px] fixed top-[110px] bg-[#fff] overflow-y-auto hidden">
+        </div>
         <p id="error" class="text-xs pt-[10px]"></p>
-        <div id="resultados" class="w-[500px]"></div>
       </div>
     </div>
     <div class="pt-[50px]">

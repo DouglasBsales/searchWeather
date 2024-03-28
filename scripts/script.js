@@ -60,6 +60,7 @@ function getClimas(nomeCidade, latitude, longitude) {
     let time = new Date(infosClima.data_current.time); // data e horário
     let infoDay = time.getDay(); // dia da semana
     let infoHour = time.getHours(); // hora atualizada
+    let hours = infoHour < 10 ? `0${infoHour}` : infoHour;
     let infoMinutes = time.getMinutes(); // minutos
     let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes; // minutos atualizados
 
@@ -145,37 +146,37 @@ function getClimas(nomeCidade, latitude, longitude) {
       case 0:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Domingo, ${infoHour}:${minutes}`;
+        ).innerText = `Domingohours}:${minutes}`;
         break;
       case 1:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Segunda-feira, ${infoHour}:${minutes}`;
+        ).innerText = `Segunda-feira, ${hours}:${minutes}`;
         break;
       case 2:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Terça-feira, ${infoHour}:${minutes}`;
+        ).innerText = `Terça-feira, ${hours}:${minutes}`;
         break;
       case 3:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Quarta-feira, ${infoHour}:${minutes}`;
+        ).innerText = `Quarta-feira, ${hours}:${minutes}`;
         break;
       case 4:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Quinta-feira, ${infoHour}:${minutes}`;
+        ).innerText = `Quinta-feira, ${hours}:${minutes}`;
         break;
       case 5:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Sexta-feira, ${infoHour}:${minutes}`;
+        ).innerText = `Sexta-feira, ${hours}:${minutes}`;
         break;
       case 6:
         document.getElementById(
           "diaSemana"
-        ).innerText = `Sábado, ${infoHour}:${minutes}`;
+        ).innerText = `Sábado, ${hours}:${minutes}`;
         break;
     }
 

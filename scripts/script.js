@@ -45,7 +45,7 @@ document.getElementById("campoClima").addEventListener("keyup", getCidades);
 
 function getClimas(nomeCidade, latitude, longitude) {
   fetch(
-    `http://my.meteoblue.com/packages/current?&name=${nomeCidade}&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw 
+    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw 
     `
   ).then(async (res) => {
     if (!res.ok) {

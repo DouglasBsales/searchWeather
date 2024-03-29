@@ -1,7 +1,9 @@
 @media (max-width: 565px) {
   #divPai,
-  #resultados,
   #campoClima {
     width: 300px;
+  }
+  #resultados {
+    width: 320px;
   }
 }

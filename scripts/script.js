@@ -120,12 +120,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     document.getElementById("pictograma").innerText = weatherInfo[pictocode];
     document.getElementById("imgClima").src = `${imgPath}${weatherInfo[
       pictocode
-    ]
-      .replace(/ /g, "")
-      .toLowerCase()
-      .replace(/([a-z])([A-Z])/g, "$1-$2")
-      .toLowerCase()}.png`;
-
+    ].replace(/ /g, "")}.png`;
     let daysOfWeek = [
       "Domingo",
       "Segunda-feira",

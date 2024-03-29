@@ -78,6 +78,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     let divDiaSemana = document.getElementById("diaSemana");
     let divPictograma = document.getElementById("pictograma");
     let divIconeGraus = document.getElementById("graus");
+    divIconeGraus.classList.remove('hidden')
 
     let isNight = isDayLight === 0;
     let imgPath = isNight ? "public/imgsNoite/" : "public/imgsDia/";

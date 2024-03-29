@@ -47,8 +47,7 @@ document.getElementById("campoClima").addEventListener("keyup", getCidades);
 
 function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
   fetch(
-    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw 
-    `
+    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw`
   ).then(async (res) => {
     if (!res.ok) {
       throw new Error("Não foi possível encontrar a cidade");
@@ -56,15 +55,17 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
 
     let infosClima = await res.json();
     console.log(infosClima);
-    let isDayLight = infosClima.data_current.isdaylight; // dia 1 noite 0
-    let pictocode = infosClima.data_current.pictocode; // condicoes climaticas
-    let temperature = infosClima.data_current.temperature.toFixed(); // temperatura
-    let time = new Date(infosClima.data_current.time); // data e horário
-    let infoDay = time.getDay(); // dia da semana
-    let infoHour = time.getHours(); // hora atualizada
+
+    let data_current = infosClima.data_current;
+    let isDayLight = data_current.isdaylight;
+    let pictocode = data_current.pictocode;
+    let temperature = data_current.temperature.toFixed();
+    let time = new Date(data_current.time);
+    let infoDay = time.getDay();
+    let infoHour = time.getHours();
+    let infoMinutes = time.getMinutes();
     let hours = infoHour < 10 ? `0${infoHour}` : infoHour;
-    let infoMinutes = time.getMinutes(); // minutos
-    let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes; // minutos atualizados
+    let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes;
 
     document.getElementById(
       "country"
@@ -72,130 +73,46 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     document.getElementById("temperatura").innerText = temperature;
     document.getElementById("graus").classList.remove("hidden");
 
-    if (isDayLight === 0 && pictocode === 1) {
-      document.getElementById("pictograma").innerText =
-        "Céu limpo e sem nuvens";
-      document.getElementById("imgClima").src = "public/claroSemNuvens.png";
-    }
-    if (isDayLight === 0 && pictocode === 2) {
-      document.getElementById("pictograma").innerText = "Claro e poucas nuvens";
-      document.getElementById("imgClima").src =
-        "public/claro e poucas nuvens.png";
-    }
-    if (isDayLight === 0 && pictocode === 3) {
-      document.getElementById("pictograma").innerText = "Parcialmente nublado";
-      document.getElementById("imgClima").src =
-        "public/parcialmente nublado.png";
-    }
-    if (isDayLight === 0 && pictocode === 4) {
-      document.getElementById("pictograma").innerText = "Nublado";
-      document.getElementById("imgClima").src = "public/nublado.png";
-    }
-    if (isDayLight === 0 && pictocode === 5) {
-      document.getElementById("pictograma").innerText = "Névoa";
-      document.getElementById("imgClima").src = "public/nublado.png";
-    }
-    if (isDayLight === 0 && pictocode === 6) {
-      document.getElementById("pictograma").innerText = "Nublado com chuva";
-      document.getElementById("imgClima").src = "public/nubladoComChuva.png";
-    }
-    if (isDayLight === 0 && pictocode === 7) {
-      document.getElementById("pictograma").innerText = "Misturado com chuva";
-      document.getElementById("imgClima").src = "public/MisturadoComchuvas.png";
-    }
-    if (isDayLight === 0 && pictocode === 8) {
-      document.getElementById("pictograma").innerText =
-        "Possíveis pancadas de chuva e trovoadas";
-      document.getElementById("imgClima").src =
-        "public/possiveisPancadasDeChuvaEtrovoadas.png";
-    }
-    if (isDayLight === 0 && pictocode === 9) {
-      document.getElementById("pictograma").innerText = "Nublado com neve";
-      document.getElementById("imgClima").src = "public/nubladoComNeve.png";
-    }
-    if (isDayLight === 0 && pictocode === 10) {
-      document.getElementById("pictograma").innerText =
-        "Misturado com pancadas de chuva";
-      document.getElementById("imgClima").src =
-        "public/misturadoComPancadasDeNeve.png";
-    }
-    if (isDayLight === 0 && pictocode === 11) {
-      document.getElementById("pictograma").innerText =
-        "Muito nublado com uma mistura de neve e chuva";
-      document.getElementById("imgClima").src =
-        "public/muitoNubladoComMisturaDeNeveEchuva.png";
-    }
-    if (isDayLight === 0 && pictocode === 12) {
-      document.getElementById("pictograma").innerText =
-        "Nublado com chuva fraca";
-      document.getElementById("imgClima").src = "public/nubladoComChuva.png";
-    }
-    if (isDayLight === 0 && pictocode === 13) {
-      document.getElementById("pictograma").innerText =
-        "Nublado com neve fraca";
-      document.getElementById("imgClima").src = "public/nubladoComNeve.png.";
-    }
-    if (isDayLight === 0 && pictocode === 14) {
-      document.getElementById("pictograma").innerText =
-        "Paricalmente nublado com chuva";
-      document.getElementById("imgClima").src =
-        "public/parcialmenteNubladoComChuva.png";
-    }
-    if (isDayLight === 0 && pictocode === 15) {
-      document.getElementById("pictograma").innerText =
-        "Maioritariamente nublado com neve";
-      document.getElementById("imgClima").src =
-        "public/maioritariamenteNubladoComNeve.png";
-    }
-    if (isDayLight === 0 && pictocode === 16) {
-      document.getElementById("pictograma").innerText =
-        "Nublado nublado com chuva fraca";
-      document.getElementById("imgClima").src = "public/nubladoComChuva.png";
-    }
-    if (isDayLight === 0 && pictocode === 17) {
-      document.getElementById("pictograma").innerText =
-        "Parcialmente nublado com neve fraca";
-      document.getElementById("imgClima").src =
-        "public/parcialmenteNubladoComNeveFraca.png";
-    }
+    let weatherInfo = {
+      1: "Céu limpo e sem nuvens",
+      2: "Claro e poucas nuvens",
+      3: "Parcialmente nublado",
+      4: "Nublado",
+      5: "Névoa",
+      6: "Nublado com chuva",
+      7: "Misturado com chuva",
+      8: "Possíveis pancadas de chuva e trovoadas",
+      9: "Nublado com neve",
+      10: "Misturado com pancadas de chuva",
+      11: "Muito nublado com uma mistura de neve e chuva",
+      12: "Nublado com chuva fraca",
+      13: "Nublado com neve fraca",
+      14: "Parcialmente nublado com chuva",
+      15: "Maioritariamente nublado com neve",
+      16: "Nublado com chuva fraca",
+      17: "Parcialmente nublado com neve fraca",
+    };
 
-    switch (infoDay) {
-      case 0:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Domingo, ${hours}:${minutes}`;
-        break;
-      case 1:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Segunda-feira, ${hours}:${minutes}`;
-        break;
-      case 2:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Terça-feira, ${hours}:${minutes}`;
-        break;
-      case 3:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Quarta-feira, ${hours}:${minutes}`;
-        break;
-      case 4:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Quinta-feira, ${hours}:${minutes}`;
-        break;
-      case 5:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Sexta-feira, ${hours}:${minutes}`;
-        break;
-      case 6:
-        document.getElementById(
-          "diaSemana"
-        ).innerText = `Sábado, ${hours}:${minutes}`;
-        break;
-    }
+    let isNight = isDayLight === 0;
+    let imgPath = isNight ? "public/imgsNoite/" : "public/";
+
+    document.getElementById("pictograma").innerText = weatherInfo[pictocode];
+    document.getElementById("imgClima").src = `${imgPath}${weatherInfo[
+      pictocode
+    ].replace(/ /g, "")}.png`;
+
+    let daysOfWeek = [
+      "Domingo",
+      "Segunda-feira",
+      "Terça-feira",
+      "Quarta-feira",
+      "Quinta-feira",
+      "Sexta-feira",
+      "Sábado",
+    ];
+    document.getElementById(
+      "diaSemana"
+    ).innerText = `${daysOfWeek[infoDay]}, ${hours}:${minutes}`;
 
     divResultados.classList.add("hidden");
     document.getElementById("campoClima").value = "";
@@ -204,7 +121,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
 
 window.onload = function () {
   getClimas("São Paulo", -23.5505, -46.6333, "São Paulo", "Brasil");
-  imgClima.classList.remove('hidden')
+  imgClima.classList.remove("hidden");
 };
 
 function closeResults() {

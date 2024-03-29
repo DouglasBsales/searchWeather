@@ -3,6 +3,7 @@ let divCampoClima = document.getElementById("campoClima");
 let divClimaAll = document.getElementById("climaAll");
 let imgClima = document.getElementById("imgClima");
 let error = document.getElementById("error");
+let backModal = document.getElementById("backModal");
 
 function getCidades() {
   let campoClima = document.getElementById("campoClima").value;
@@ -23,8 +24,8 @@ function getCidades() {
       error.innerText = "";
     }
 
+    backModal.classList.remove("hidden");
     divResultados.innerHTML = "";
-    console.log(results);
     results.forEach((element) => {
       let divResults = document.createElement("div");
 
@@ -47,15 +48,13 @@ document.getElementById("campoClima").addEventListener("keyup", getCidades);
 
 function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
   fetch(
-    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw`
+    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&windspeed=kmh&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw`
   ).then(async (res) => {
     if (!res.ok) {
       throw new Error("Não foi possível encontrar a cidade");
     }
 
     let infosClima = await res.json();
-    console.log(infosClima);
-
     let data_current = infosClima.data_current;
     let isDayLight = data_current.isdaylight;
     let pictocode = data_current.pictocode;
@@ -67,6 +66,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     let hours = infoHour < 10 ? `0${infoHour}` : infoHour;
     let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes;
 
+    backModal.classList.add("hidden");
     document.getElementById(
       "country"
     ).innerText = `${nomeCidade}, ${nomeEstado} - ${pais}`;
@@ -93,14 +93,34 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
       17: "Parcialmente nublado com neve fraca",
     };
 
+    let prevTempo = document.getElementById("prevTempo");
+
     let isNight = isDayLight === 0;
-    let imgPath = isNight ? "public/imgsNoite/" : "public/";
+    let imgPath = isNight ? "public/imgsNoite/" : "public/imgsDia/";
+    let body = document.querySelector("body");
+    if (isNight) {
+      body.classList.add("bg-[#202020]");
+      prevTempo.classList.add("text-[#fff]");
+      country.classList.add("text-[#fff]");
+      document.getElementById("diaSemana").classList.add("text-[#CCCCCC]");
+      document.getElementById("pictograma").classList.add("text-[#CCCCCC]");
+      document.getElementById("temperatura").classList.add("text-[#fff]");
+      document.getElementById("temp2").classList.add("text-[#fff]");
+    } else {
+      body.classList.remove("bg-[#202020]");
+      body.classList.remove("bg-[#202020]");
+      prevTempo.classList.remove("text-[#fff]");
+      country.classList.remove("text-[#fff]");
+      document.getElementById("diaSemana").classList.remove("text-[#CCCCCC]");
+      document.getElementById("pictograma").classList.remove("text-[#CCCCCC]");
+      document.getElementById("temperatura").classList.remove("text-[#fff]");
+      document.getElementById("temp2").classList.remove("text-[#fff]");
+    }
 
     document.getElementById("pictograma").innerText = weatherInfo[pictocode];
     document.getElementById("imgClima").src = `${imgPath}${weatherInfo[
       pictocode
     ].replace(/ /g, "")}.png`;
-
     let daysOfWeek = [
       "Domingo",
       "Segunda-feira",
@@ -128,6 +148,7 @@ function closeResults() {
   document.querySelector("body").addEventListener("click", () => {
     divResultados.innerText = "";
     divResultados.classList.add("hidden");
+    backModal.classList.add("hidden");
   });
 }
 

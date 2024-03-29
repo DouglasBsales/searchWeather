@@ -146,6 +146,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
 window.onload = function () {
   getClimas("São Paulo", -23.5505, -46.6333, "São Paulo", "Brasil");
   imgClima.classList.remove("hidden");
+  divIconeGraus.classList.remove('hidden')
 };
 
 function closeResults() {

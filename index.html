@@ -11,14 +11,18 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
     />
   </head>
-  <body class="flex justify-center bg-[#202020]">
+  <body class="flex justify-center">
+    <div
+      id="backModal"
+      class="w-full h-screen fixed bg-[#00000080] hidden"
+    ></div>
     <div class="max-w-[600px] flex flex-col items-center" id="divPai">
       <div class="w-full flex flex-col items-center pb-[30px] pt-[20px]">
-        <div class="flex gap-[5px] pb-[20px]">
-          <p class="font-semibold text-[#5D5D5D]">Previsão do tempo</p>
+        <div class="flex gap-[5px] pb-[20px]" id="prevTempo">
+          <p class="font-semibold">Previsão do tempo</p>
           <i class="bi bi-cloud text-lg"></i>
         </div>
-        <div class="flex">
+        <div class="flex z-10">
           <div class="border rounded-md bg-[#fff]">
             <div class="flex items-center">
               <i class="bi bi-search text-lg text-[#5D5D5D] pl-[10px]"></i>
@@ -35,7 +39,7 @@
       <div class="flex flex-col items-center" id="climaAll">
         <div>
           <img
-            src="public/imgsNoite/nubladoComChuva.png"
+            src="public/imgsDia/Parcialmente nublado.png"
             alt=""
             class="w-[300px] hidden bg-transparent"
             id="imgClima"
@@ -48,8 +52,10 @@
             <div class="flex justify-center">
               <p id="temperatura" class="text-7xl"></p>
               <div class="flex text-lg hidden" id="graus">
-                <p>°</p>
-                <p>C</p>
+                <div class="flex" id="temp2">
+                  <p>°</p>
+                  <p>C</p>
+                </div>
               </div>
             </div>
             <p id="pictograma" class="text-md font-semibold text-[#5D5D5D]"></p>
@@ -59,12 +65,11 @@
       <div class="flex flex-col items-center" id="descobriClima">
         <div
           id="resultados"
-          class="w-[525px] h-[400px] fixed top-[110px] bg-[#fff] overflow-y-auto hidden"
+          class="w-[525px] h-[400px] absolute top-[114px] rounded-md bg-[#FAFAFA] overflow-y-auto hidden"
         ></div>
         <p id="error" class="text-xs pt-[10px]"></p>
       </div>
     </div>
-    <div class="pt-[50px]"></div>
   </body>
   <script src="scripts/script.js"></script>
 </html>

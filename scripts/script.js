@@ -18,10 +18,11 @@ function getCidades() {
     let data = await res.json();
     let results = data.results;
     if (results.length === 0) {
-      error.innerText = "Não foi possível encontrar sua cidade";
-      closeResults();
+      error.classList.remove("hidden");
+      divResultados.innerText = "";
+      divResultados.classList.add("hidden");
     } else {
-      error.innerText = "";
+      error.classList.add("hidden");
     }
 
     backModal.classList.remove("hidden");
@@ -66,12 +67,40 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     let hours = infoHour < 10 ? `0${infoHour}` : infoHour;
     let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes;
 
+    let divCountry = document.getElementById("country");
+    let divTemperature = document.getElementById("temperatura");
+
     backModal.classList.add("hidden");
-    document.getElementById(
-      "country"
-    ).innerText = `${nomeCidade}, ${nomeEstado} - ${pais}`;
-    document.getElementById("temperatura").innerText = temperature;
-    document.getElementById("graus").classList.remove("hidden");
+    divCountry.innerText = `${nomeCidade}, ${nomeEstado} - ${pais}`;
+    divTemperature.innerText = temperature;
+
+    let prevTempo = document.getElementById("prevTempo");
+    let divDiaSemana = document.getElementById("diaSemana");
+    let divPictograma = document.getElementById("pictograma");
+    let divIconeGraus = document.getElementById("graus");
+
+    let isNight = isDayLight === 0;
+    let imgPath = isNight ? "public/imgsNoite/" : "public/imgsDia/";
+    let body = document.querySelector("body");
+
+    if (isNight) {
+      body.classList.add("bg-[#202020]");
+      prevTempo.classList.add("text-[#fff]");
+      divCountry.classList.add("text-[#fff]");
+      divDiaSemana.classList.add("text-[#CCCCCC]");
+      divPictograma.classList.add("text-[#CCCCCC]");
+      divTemperature.classList.add("text-[#fff]");
+      divIconeGraus.classList.add("text-[#fff]");
+    } else {
+      body.classList.remove("bg-[#202020]");
+      body.classList.remove("bg-[#202020]");
+      prevTempo.classList.remove("text-[#fff]");
+      country.classList.remove("text-[#fff]");
+      divDiaSemana.classList.remove("text-[#CCCCCC]");
+      divPictograma.classList.remove("text-[#CCCCCC]");
+      divTemperature.classList.remove("text-[#fff]");
+      divIconeGraus.classList.remove("text-[#fff]");
+    }
 
     let weatherInfo = {
       1: "Céu limpo e sem nuvens", // ok
@@ -93,34 +122,8 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
       17: "Parcialmente nublado com neve fraca", // ok
     };
 
-    let prevTempo = document.getElementById("prevTempo");
-
-    let isNight = isDayLight === 0;
-    let imgPath = isNight ? "public/imgsNoite/" : "public/imgsDia/";
-    let body = document.querySelector("body");
-    if (isNight) {
-      body.classList.add("bg-[#202020]");
-      prevTempo.classList.add("text-[#fff]");
-      country.classList.add("text-[#fff]");
-      document.getElementById("diaSemana").classList.add("text-[#CCCCCC]");
-      document.getElementById("pictograma").classList.add("text-[#CCCCCC]");
-      document.getElementById("temperatura").classList.add("text-[#fff]");
-      document.getElementById("temp2").classList.add("text-[#fff]");
-    } else {
-      body.classList.remove("bg-[#202020]");
-      body.classList.remove("bg-[#202020]");
-      prevTempo.classList.remove("text-[#fff]");
-      country.classList.remove("text-[#fff]");
-      document.getElementById("diaSemana").classList.remove("text-[#CCCCCC]");
-      document.getElementById("pictograma").classList.remove("text-[#CCCCCC]");
-      document.getElementById("temperatura").classList.remove("text-[#fff]");
-      document.getElementById("temp2").classList.remove("text-[#fff]");
-    }
-
     document.getElementById("pictograma").innerText = weatherInfo[pictocode];
-    document.getElementById("imgClima").src = `${imgPath}${weatherInfo[
-      pictocode
-    ].replace(/ /g, "")}.png`;
+    imgClima.src = `${imgPath}${weatherInfo[pictocode].replace(/ /g, "")}.png`;
     let daysOfWeek = [
       "Domingo",
       "Segunda-feira",
@@ -149,6 +152,7 @@ function closeResults() {
     divResultados.innerText = "";
     divResultados.classList.add("hidden");
     backModal.classList.add("hidden");
+    error.classList.add("hidden");
   });
 }
 

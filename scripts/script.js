@@ -74,23 +74,23 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     document.getElementById("graus").classList.remove("hidden");
 
     let weatherInfo = {
-      1: "Céu limpo e sem nuvens",
-      2: "Claro e poucas nuvens",
-      3: "Parcialmente nublado",
-      4: "Nublado",
-      5: "Névoa",
-      6: "Nublado com chuva",
-      7: "Misturado com chuva",
-      8: "Possíveis pancadas de chuva e trovoadas",
-      9: "Nublado com neve",
-      10: "Misturado com pancadas de chuva",
-      11: "Muito nublado com uma mistura de neve e chuva",
-      12: "Nublado com chuva fraca",
-      13: "Nublado com neve fraca",
-      14: "Parcialmente nublado com chuva",
-      15: "Maioritariamente nublado com neve",
+      1: "Céu limpo e sem nuvens", // ok
+      2: "Claro e poucas nuvens", // ok
+      3: "Parcialmente nublado", // ok
+      4: "Nublado", // ok
+      5: "Névoa", // ok
+      6: "Nublado com chuva", // ok
+      7: "Misturado com chuva", // ok
+      8: "Possíveis pancadas de chuva e trovoadas", // ok
+      9: "Nublado com neve", // ok
+      10: "Misturado com pancadas de chuva", // ok
+      11: "Muito nublado com uma mistura de neve e chuva", // ok
+      12: "Nublado com chuva fraca", // ok
+      13: "Nublado com neve fraca", // ok
+      14: "Parcialmente nublado com chuva", // ok
+      15: "Maioritariamente nublado com neve", // ok
       16: "Nublado com chuva fraca",
-      17: "Parcialmente nublado com neve fraca",
+      17: "Parcialmente nublado com neve fraca", // ok
     };
 
     let prevTempo = document.getElementById("prevTempo");

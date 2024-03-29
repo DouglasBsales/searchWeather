@@ -3,7 +3,7 @@
   #campoClima {
     width: 300px;
   }
-  #resultados {
+  #resultados, #error {
     width: 320px;
   }
 }

@@ -4,19 +4,21 @@ let divClimaAll = document.getElementById("climaAll");
 let imgClima = document.getElementById("imgClima");
 let error = document.getElementById("error");
 let backModal = document.getElementById("backModal");
+let pErrorServer = document.getElementById("errorServer");
 
 function getCidades() {
   let campoClima = document.getElementById("campoClima").value;
 
   fetch(
-    `https://www.meteoblue.com/pt/server/search/query3?query=${campoClima}&apikey=73WC9IzLXcoNfuPw.`
+    `https://www.meteoblue.com/pt/server/search/query3?query=${campoClima}&apikey=UWBsg08vMwA1ODuE`
   ).then(async (res) => {
     if (!res.ok) {
-      throw new Error("ocorreu um erro, já estamos verificando!");
+      throw new Error("ocorreu um pequeno erro, já estamos verificando!");
     }
 
     let data = await res.json();
     let results = data.results;
+    console.log(results);
     if (results.length === 0) {
       error.classList.remove("hidden");
       divResultados.innerText = "";
@@ -49,23 +51,46 @@ document.getElementById("campoClima").addEventListener("keyup", getCidades);
 
 function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
   fetch(
-    `https://my.meteoblue.com/packages/current?&name=${nomeCidade}&windspeed=kmh&lat=${latitude}&lon=${longitude}&apikey=73WC9IzLXcoNfuPw`
+    `https://my.meteoblue.com/packages/current_basic-day?&name=${nomeCidade}&windspeed=kmh&lat=${latitude}&lon=${longitude}&apikey=UWBsg08vMwA1ODuE`
   ).then(async (res) => {
     if (!res.ok) {
-      throw new Error("Não foi possível encontrar a cidade");
+      throw new Error("Ocorreu um pequeno erro, já estamos verificando!");
     }
 
     let infosClima = await res.json();
+    console.log(infosClima);
     let data_current = infosClima.data_current;
     let isDayLight = data_current.isdaylight;
     let pictocode = data_current.pictocode;
     let temperature = data_current.temperature.toFixed();
+    let temperatureMin = infosClima.data_day.temperature_min;
+    let temperatureMax = infosClima.data_day.temperature_max;
     let time = new Date(data_current.time);
     let infoDay = time.getDay();
     let infoHour = time.getHours();
     let infoMinutes = time.getMinutes();
     let hours = infoHour < 10 ? `0${infoHour}` : infoHour;
     let minutes = infoMinutes < 10 ? `0${infoMinutes}` : infoMinutes;
+
+    let TempMaxNumber = 0;
+    let pTempMax = document.getElementById("tempMax");
+
+    for (i = 0; i < temperatureMax.length; i++) {
+      if (TempMaxNumber < temperatureMax[i]) {
+        TempMaxNumber = temperatureMax[i];
+      }
+    }
+    pTempMax.innerText = `Max: ${TempMaxNumber}`;
+
+    let TempMinNumber = 0;
+    let pTempMin = document.getElementById("tempMin");
+
+    for (i = 0; i < temperatureMin.length; i++) {
+      if (TempMinNumber < temperatureMax[i]) {
+        TempMinNumber = temperatureMax[i];
+      }
+    }
+    pTempMin.innerHTML = `Max: ${TempMinNumber}`;
 
     let divCountry = document.getElementById("country");
     let divTemperature = document.getElementById("temperatura");
@@ -78,7 +103,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     let divDiaSemana = document.getElementById("diaSemana");
     let divPictograma = document.getElementById("pictograma");
     let divIconeGraus = document.getElementById("graus");
-    divIconeGraus.classList.remove('hidden')
+    divIconeGraus.classList.remove("hidden");
 
     let isNight = isDayLight === 0;
     let imgPath = isNight ? "public/imgsNoite/" : "public/imgsDia/";
@@ -146,7 +171,7 @@ function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
 window.onload = function () {
   getClimas("São Paulo", -23.5505, -46.6333, "São Paulo", "Brasil");
   imgClima.classList.remove("hidden");
-  divIconeGraus.classList.remove('hidden')
+  divIconeGraus.classList.remove("hidden");
 };
 
 function closeResults() {

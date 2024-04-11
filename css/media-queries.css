@@ -3,8 +3,9 @@
   #campoClima {
     width: 300px;
   }
-  #resultados,
-  #error {
+  #divPaiResultados,
+  #error, 
+  #animationModal {
     width: 320px;
   }
 

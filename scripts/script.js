@@ -32,7 +32,6 @@ async function getCidades() {
     error.classList.add('hidden');
     createElements(data.results);
   }
-  console.log(data.results);
   animationModal.classList.add('hidden');
 }
 divCampoClima.addEventListener('keyup', getCidades);
@@ -66,7 +65,6 @@ async function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
   animationCircle.classList.add('hidden');
 
   let infosClima = await response.json();
-  console.log(infosClima);
   let data_current = infosClima.data_current;
   let isDayLight = data_current.isdaylight;
   let pictocode = data_current.pictocode;

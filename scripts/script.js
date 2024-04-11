@@ -3,6 +3,7 @@ let divResultados = document.getElementById("resultados");
 let divCampoClima = document.getElementById("campoClima");
 let divClimaAll = document.getElementById("climaAll");
 let imgClima = document.getElementById("imgClima");
+let divFoto = document.getElementById('divFoto')
 let error = document.getElementById("error");
 let backModal = document.getElementById("backModal");
 let pErrorServer = document.getElementById("errorServer");
@@ -63,6 +64,7 @@ async function getClimas(nomeCidade, latitude, longitude, nomeEstado, pais) {
     `https://my.meteoblue.com/packages/current_basic-day?&name=${nomeCidade}&windspeed=kmh&lat=${latitude}&lon=${longitude}&apikey=1EP8nySF9DlqArQN`);
   
   animationCircle.classList.add('hidden');
+  divFoto.classList.remove('hidden')
 
   let infosClima = await response.json();
   let data_current = infosClima.data_current;
@@ -176,6 +178,7 @@ function Nigth(isNight){
 
 window.onload = function () {
   getClimas("São Paulo", -23.5505, -46.6333, "São Paulo", "Brasil");
+
 };
 
 function closeResults() {

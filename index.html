@@ -23,17 +23,17 @@
     ></div>
     <div class="max-w-[600px] flex flex-col items-center" id="divPai">
       <div class="w-full flex flex-col items-center pt-[20px]">
-        <div class="flex gap-[5px] pb-[20px]" id="prevTempo">
+        <div class="flex gap-[5px] pb-[5px]" id="prevTempo">
           <p class="font-semibold">Previsão do tempo</p>
           <i class="bi bi-cloud text-lg"></i>
         </div>
-        <div class="flex z-10 pb-[20px]">
+        <div class="flex z-10 pb-[10px]">
           <div class="border rounded-md bg-[#fff]">
             <div class="flex items-center">
               <i class="bi bi-search text-lg text-[#5D5D5D] pl-[10px]"></i>
               <input
                 type="text"
-                class="w-[500px] h-[40px] outline-none pl-[10px]"
+                class="w-[500px] h-[40px] outline-none pl-[10px] z-40"
                 id="campoClima"
                 placeholder="Informe sua cidade"
               />
@@ -41,12 +41,15 @@
           </div>
         </div>
       </div>
+      <div id="animationCircle">
+        <img src="public/animation/TyTNnOyMW5 (1).gif" alt="animation circle">
+      </div>
       <div class="flex flex-col items-center" id="climaAll">
         <div>
           <img
             src="#"
             alt=""
-            class="w-[300px] hidden bg-transparent"
+            class="w-[200px] bg-transparent"
             id="imgClima"
           />
         </div>
@@ -55,7 +58,7 @@
             <p id="country"></p>
             <p id="diaSemana" class="text-md font-semibold text-[#5D5D5D]"></p>
             <div class="flex justify-center">
-              <p id="temperatura" class="text-7xl"></p>
+              <p id="temperatura" class="text-6xl"></p>
               <div class="flex text-lg">
                 <div class="flex hidden" id="graus">
                   <p>°</p>
@@ -63,9 +66,11 @@
                 </div>
               </div>
             </div>
-            <div class="flex justify-between pb-[10px]">
-              <p class="font-semibold" id="tempMax"></p>
-              <p class="font-semibold" id="tempMin"></p>
+            <div class="w-full pb-[10px]">
+              <div class="flex justify-center gap-[50px] pr-[10px]">
+                <p class="font-semibold" id="tempMax"></p>
+                <p class="font-semibold" id="tempMin"></p>
+              </div>
             </div>
             <p
               id="pictograma"
@@ -75,16 +80,19 @@
         </div>
       </div>
       <div class="flex flex-col items-center" id="descobriClima">
-        <div
-          id="resultados"
-          class="w-[525px] absolute h-[430px] top-[114px] rounded-md bg-[#FAFAFA] overflow-y-auto hidden"
-        ></div>
+        <div class="w-[525px] absolute h-[430px] top-[98px] rounded-md bg-[#FAFAFA] overflow-y-auto hidden z-10" id="divPaiResultados">
+          <div id="resultados"></div>
+        </div>
         <p
           id="error"
-          class="text-xs pt-[10px] absolute top-[114px] rounded-md bg-[#FAFAFA] w-[525px] text-center hidden py-[10px]"
+          class="text-xs pt-[10px] absolute top-[98px] rounded-md bg-[#FAFAFA] w-[525px] text-center hidden py-[10px] z-20"
         >
           Não foi possível encontrar sua cidade
         </p>
+        <div class="w-[525px] flex flex-col items-center absolute top-[98px] rounded-md bg-[#FAFAFA] hidden z-20" id="animationModal">
+          <p>Carregando...</p>
+          <img src="public/animation/aimationModalCircle.gif" alt="animation" class="w-[40px]">
+        </div>
       </div>
       <p id="serverErro"></p>
     </div>
